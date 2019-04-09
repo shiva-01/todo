@@ -1,0 +1,12 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+  {% if edit_task %}
+  <form class="form-inline my-2 my-lg-0"  method="post">
+    {% csrf_token %}
+    <input class="form-control mr-sm-2" type="search" placeholder="{{ edit_task.task }}" airel-label="Search" name="task" value="{{ edit_task.task }}">
+    <input type="hidden" name="completed" value="{{ edit_task.Accomplished }}">
+    <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" >Edit Task</button>
+  </form>
+  {% endif %}
+{% endblock %}
