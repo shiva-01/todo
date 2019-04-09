@@ -1,0 +1,33 @@
+{% extends 'base_layout.html' %}
+
+
+{% block content %}
+  {% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-warning alert-dismissable" role="alert">
+        <button class="close" data-dismiss="alert"> <small> <sup> x </sup> </small> </button>
+        {{ message }}
+    </div>
+  {% endfor %}
+  {% endif %}
+  {% if tasks %}
+    <table class="table table-boedered">
+    {% for task in tasks %}
+      {% if task.Accomplished %}
+        <tr class="table-secondary">
+          <td> <center><a href="{% url 'editTask' task.id %}">{{ task.task }}</a></center></td>
+          <td class="striker"><center><a href="{% url 'task_not_compleated' task.id %}">Not Accomplished </a></center></td>
+          <td><center><a href="{% url 'deleteTask' task.id %}">Delete</a></center></td>
+        </tr>
+      {% else %}
+        <tr>
+          <td> <center><a href="{% url 'editTask' task.id %}">{{ task.task }}</a></center></td>
+          <td><center><a href="{% url 'task_compleated' task.id %}"> Accomplished </a>  </center></td>
+          <td><center><a href="{% url 'deleteTask' task.id %}">Delete</a></center></td>
+        </tr>
+      {% endif %}
+    {% endfor %}
+    </table>
+  {% endif %}
+
+{% endblock %}
